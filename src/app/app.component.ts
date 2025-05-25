@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { WeatherService } from './service/weather-app.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   imports: [CommonModule, FormsModule],
   styleUrls: ['./app.component.css'],
-  providers: [HttpClient],
 })
 export class AppComponent implements OnInit {
   city = '';
@@ -31,7 +29,6 @@ export class AppComponent implements OnInit {
 
     this.weatherService.getWeather(this.city).subscribe({
       next: (data) => {
-        console.log(data);
         this.weather = data;
         this.error = '';
         this.saveToHistory(this.city);
