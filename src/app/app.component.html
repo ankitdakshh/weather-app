@@ -2,7 +2,7 @@
   <h1>Weather App</h1>
   <input [(ngModel)]="city" placeholder="Search for a city" />
   <button (click)="search()">Submit</button>
-  <p @if(error) style="color: red">{{ error }}</p>
+  <p *ngIf="error" style="color: red">{{ error }}</p>
 
   <div *ngIf="weather">
     <h2>{{ weather.name }}</h2>
@@ -17,10 +17,11 @@
 
   <div>
     <h3>History</h3>
-    @for (item of history; track item) {
-    <li>{{ item }}</li>
-    } @empty {
-    <li>There are no items.</li>
-    }
+    <ul *ngIf="history && history.length > 0; else noItems">
+      <li *ngFor="let item of history">{{ item }}</li>
+    </ul>
+    <ng-template #noItems>
+      <li>There are no items.</li>
+    </ng-template>
   </div>
 </div>

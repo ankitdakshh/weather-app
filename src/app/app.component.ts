@@ -49,7 +49,9 @@ export class AppComponent implements OnInit {
     this.loadHistory();
   }
 
-  loadHistory() {
-    this.history = JSON.parse(localStorage.getItem('weatherHistory') || '[]');
+  loadHistory(): void {
+    if (typeof window !== 'undefined' && localStorage.getItem('history')) {
+      this.history = JSON.parse(localStorage.getItem('history') || '[]');
+    }
   }
 }
